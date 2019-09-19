@@ -1,3 +1,3 @@
-module github.com/hlts2/jsonenv
+module github.com/hlts2/envjson
 
 go 1.13
