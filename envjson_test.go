@@ -7,7 +7,70 @@ import (
 )
 
 func TestLoad(t *testing.T) {
+	type input struct {
+		paths []string
+	}
 
+	type want struct {
+		isErr bool
+		m     map[string]string
+	}
+
+	type test struct {
+		input input
+		want  want
+	}
+
+	tests := []test{
+		{
+			input: input{
+				paths: []string{"./test/testdata/.envjson_1", "./test/testdata/.envjson_2"},
+			},
+			want: want{
+				isErr: false,
+				m: map[string]string{
+					"debug": "true",
+					"name":  "envjson",
+				},
+			},
+		},
+
+		{
+			input: input{
+				paths: []string{"./test/testdata/.envjson_invalid"},
+			},
+			want: want{
+				isErr: true,
+				m:     map[string]string{},
+			},
+		},
+
+		{
+			input: input{
+				paths: []string{"./test/testdata/not_exists_file"},
+			},
+			want: want{
+				isErr: true,
+				m:     map[string]string{},
+			},
+		},
+	}
+
+	for i, test := range tests {
+		err := Load(test.input.paths...)
+
+		isErr := !(err == nil)
+
+		if got, want := isErr, test.want.isErr; got != want {
+			t.Errorf("tests[%d] - Load isErr is wrong, want: %v, but got: %v", i, want, got)
+		}
+
+		for k, v := range test.want.m {
+			if got, want := os.Getenv(k), v; got != want {
+				t.Errorf("tests[%d] - Load key: %v is wrong, want: %v, but got: %v", i, k, want, got)
+			}
+		}
+	}
 }
 
 func TestSetEnv(t *testing.T) {
