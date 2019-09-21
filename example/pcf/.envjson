@@ -1,0 +1,23 @@
+{
+    "VCAP_APPLICATION": {
+        "application_id": "application_id",
+        "name": "name"
+    },
+
+    "VCAP_SERVICES": {
+        "user-provided": [
+            {
+                "name": "name",
+                "instance_name": "instance_name",
+                "binding_name": null,
+                "credentials": {},
+                "syslog_drain_url": "",
+                "volume_mounts": [],
+                "label": "user-provided",
+                "tag": []
+            }
+        ]
+    },
+
+    "ENV": "dev"
+}
