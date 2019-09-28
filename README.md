@@ -45,7 +45,7 @@ import (
 )
 
 func main() {
-    err := godotenv.Load()
+    err := envjson.Load()
     if err != nil {
         log.Fatal("Error loading .env file")
     }
