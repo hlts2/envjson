@@ -33,3 +33,25 @@ Add your application configuration to your `.envjson` file in the root of your p
 }
 ```
 
+Then in your Go app you can do something like
+
+```go
+package main
+
+import (
+    "github.com/hlts2/envjson"
+    "log"
+    "os"
+)
+
+func main() {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatal("Error loading .env file")
+    }
+
+    debug := os.Getenv("debug")
+    db := os.Getenv("db")
+}
+
+```
