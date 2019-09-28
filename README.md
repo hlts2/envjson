@@ -1,8 +1,5 @@
 # envjson
 
-## Requirement
-Go (>= 1.11)
-
 ## Installation
 
 ```shell
